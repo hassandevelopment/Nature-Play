@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Nature Play — Where Childhood Blooms Naturally</title>
+<meta name="description" content="Nature Play is a sensory play space for children at Villagio Mall, Janabiyah, Bahrain. Sand exploration, craft & create, birthday parties and school trips." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --bg: #F5E6C8;
+    --bg-soft: #FBF1DA;
+    --ink: #1F4258;
+    --ink-soft: #4F6C7E;
+    --teal: #3FB3A8;
+    --teal-deep: #2E8F87;
+    --coral: #F08068;
+    --coral-soft: #F6A38E;
+    --peach: #F4A05C;
+    --peach-soft: #F8C593;
+    --sun: #F5C24A;
+    --sand: #F2DEB5;
+
+    --radius-card: 28px;
+    --radius-pill: 999px;
+
+    --shadow-soft: 0 10px 30px -16px rgba(31,66,88,0.25);
+    --shadow-pop: 0 14px 32px -14px rgba(31,66,88,0.32);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 600;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fredoka', system-ui, sans-serif;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  h1 { font-size: clamp(2.4rem, 9vw, 4.2rem); line-height: 1.05; }
+  h2 { font-size: clamp(1.8rem, 5.5vw, 2.6rem); line-height: 1.1; }
+  h3 { font-size: 1.25rem; }
+  p { margin: 0; }
+
+  .container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
+  /* ---------- Top Bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(245, 230, 200, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(31,66,88,0.06);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 22px;
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: 12px;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Fredoka', sans-serif; font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  .brand .mark {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    background: var(--teal);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .brand .mark svg { width: 22px; height: 22px; color: white; }
+  .brand .name { display: flex; gap: 4px; }
+  .brand .name .a { color: var(--teal); }
+  .brand .name .b { color: var(--coral); }
+
+  .topbar nav {
+    display: none;
+    gap: 26px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  .topbar nav a { color: var(--ink); opacity: 0.78; transition: opacity .2s; }
+  .topbar nav a:hover { opacity: 1; }
+
+  .wa-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #25D366;
+    color: white;
+    border-radius: var(--radius-pill);
+    padding: 9px 16px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 6px 14px -6px rgba(37,211,102,0.55);
+    transition: transform .15s ease;
+  }
+  .wa-pill:hover { transform: translateY(-1px); }
+  .wa-pill svg { width: 16px; height: 16px; }
+
+  @media (min-width: 820px) {
+    .topbar nav { display: flex; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    padding: 56px 0 36px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero .cloud {
+    position: absolute;
+    background: var(--bg-soft);
+    border-radius: 999px;
+    z-index: 0;
+    opacity: 0.85;
+  }
+  .hero .cloud::before, .hero .cloud::after {
+    content: ""; position: absolute; background: inherit; border-radius: inherit;
+  }
+  .cloud-1 { width: 140px; height: 50px; top: 30px; left: -30px; }
+  .cloud-1::before { width: 70px; height: 70px; top: -28px; left: 22px; }
+  .cloud-1::after  { width: 50px; height: 50px; top: -18px; left: 80px; }
+  .cloud-2 { width: 110px; height: 38px; top: 130px; right: -20px; }
+  .cloud-2::before { width: 55px; height: 55px; top: -22px; left: 18px; }
+  .cloud-2::after  { width: 40px; height: 40px; top: -14px; left: 62px; }
+
+  .hero-photo {
+    width: clamp(160px, 38vw, 220px);
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 18px;
+    position: relative; z-index: 1;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: var(--shadow-pop);
+  }
+  .hero-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  .hero h1 {
+    position: relative; z-index: 1;
+    margin-bottom: 12px;
+  }
+  .hero h1 .a { color: var(--teal); }
+  .hero h1 .b { color: var(--coral); }
+
+  .tagline {
+    position: relative; z-index: 1;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    color: var(--coral);
+    font-size: clamp(1.05rem, 3.6vw, 1.35rem);
+    margin-bottom: 28px;
+  }
+
+  .cta-row {
+    position: relative; z-index: 1;
+    display: flex; flex-wrap: wrap; gap: 12px;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    border-radius: var(--radius-pill);
+    padding: 14px 24px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none; cursor: pointer;
+    transition: transform .15s ease, box-shadow .2s ease;
+    text-decoration: none;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: var(--coral); color: white;
+    box-shadow: 0 10px 24px -10px rgba(240,128,104,0.7);
+  }
+  .btn-secondary {
+    background: var(--teal); color: white;
+    box-shadow: 0 10px 24px -10px rgba(63,179,168,0.7);
+  }
+  .btn-ghost {
+    background: transparent; color: var(--ink);
+    border: 2px solid rgba(31,66,88,0.18);
+  }
+  .btn svg { width: 18px; height: 18px; }
+
+  .hero-meta {
+    margin-top: 24px;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: white; color: var(--ink);
+    border-radius: var(--radius-pill);
+    padding: 8px 16px 8px 12px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 0.92rem;
+    box-shadow: var(--shadow-soft);
+    position: relative; z-index: 1;
+  }
+  .hero-meta .dot { width: 8px; height: 8px; border-radius: 50%; background: #2EBE5B; box-shadow: 0 0 0 4px rgba(46,190,91,0.18); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 64px 0; position: relative; }
+  .section-eyebrow {
+    display: inline-block;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    color: var(--teal-deep);
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .section-head { text-align: center; max-width: 640px; margin: 0 auto 36px; }
+  .section-head p { color: var(--ink-soft); margin-top: 10px; font-size: 1.02rem; }
+
+  /* ---------- About strip ---------- */
+  .about {
+    background: var(--bg-soft);
+    border-radius: var(--radius-card);
+    padding: 36px 28px;
+    margin: 0 22px;
+    text-align: center;
+    box-shadow: var(--shadow-soft);
+  }
+  .about p {
+    font-size: clamp(1.05rem, 2.6vw, 1.2rem);
+    color: var(--ink);
+    max-width: 620px; margin: 0 auto;
+    line-height: 1.6;
+  }
+  .about .leaf {
+    display: inline-block; font-size: 1.4rem; margin: 0 4px; transform: translateY(2px);
+  }
+
+  /* ---------- Photo gallery ---------- */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 22px;
+    display: block;
+  }
+  .g-1 { grid-column: span 4; aspect-ratio: 4/3; }
+  .g-2 { grid-column: span 2; aspect-ratio: 1/1.5; }
+  .g-3 { grid-column: span 2; aspect-ratio: 1/1; }
+  .g-4 { grid-column: span 2; aspect-ratio: 1/1; }
+  .g-5 { grid-column: span 2; aspect-ratio: 1/1; }
+  @media (max-width: 640px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .g-1 { grid-column: span 2; aspect-ratio: 16/10; }
+    .g-2, .g-3, .g-4, .g-5 { grid-column: span 1; aspect-ratio: 1/1; }
+  }
+
+  /* ---------- Offer cards ---------- */
+  .offers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  @media (min-width: 720px) {
+    .offers { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 980px) {
+    .offers { grid-template-columns: repeat(3, 1fr); }
+  }
+  .offer {
+    background: white;
+    border-radius: var(--radius-card);
+    padding: 22px;
+    display: flex; flex-direction: column;
+    box-shadow: var(--shadow-soft);
+    transition: transform .2s ease, box-shadow .2s ease;
+    overflow: hidden;
+    position: relative;
+  }
+  .offer:hover { transform: translateY(-3px); box-shadow: var(--shadow-pop); }
+  .offer .ic {
+    width: 56px; height: 56px;
+    border-radius: 18px;
+    display: grid; place-items: center;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+  }
+  .offer h3 { font-size: 1.3rem; margin-bottom: 6px; }
+  .offer p { color: var(--ink-soft); font-size: 0.97rem; line-height: 1.5; }
+  .offer .tag {
+    align-self: flex-start;
+    margin-top: 14px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+  }
+  .offer .ic svg { width: 30px; height: 30px; }
+  .ic-teal  { background: #DCF1EE; color: var(--teal-deep); }
+  .ic-coral { background: #FCE2DA; color: #C7553B; }
+  .ic-peach { background: #FDE4CC; color: #B96B2A; }
+  .ic-sun   { background: #FAE9B6; color: #8A6A12; }
+  .ic-navy  { background: #DDE6EC; color: var(--ink); }
+  .ic-sand  { background: #F1E2C2; color: #886A2B; }
+
+  /* ---------- Pricing ---------- */
+  #pricing {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 60%, var(--bg) 100%);
+  }
+  .pricing-grid {
+    display: grid; gap: 16px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 980px) {
+    .pricing-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .price-card {
+    background: white;
+    border-radius: var(--radius-card);
+    padding: 24px 22px;
+    box-shadow: var(--shadow-soft);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    border-top: 5px solid var(--teal);
+  }
+  .price-card.coral { border-top-color: var(--coral); }
+  .price-card.peach { border-top-color: var(--peach); }
+  .price-card.navy  { border-top-color: var(--ink); }
+
+  .price-card .label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .price-card h3 { font-size: 1.4rem; margin-bottom: 14px; }
+  .price-card .price {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    color: var(--ink);
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+  .price-card .price small {
+    font-size: 0.95rem; color: var(--ink-soft); font-weight: 500; margin-left: 4px;
+  }
+  .price-card .sub {
+    margin-top: 6px;
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+  .pay-note {
+    margin-top: 22px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+  }
+  .pay-note strong { color: var(--ink); }
+
+  /* ---------- Visit (hours + location) ---------- */
+  .visit {
+    display: grid; gap: 18px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 820px) {
+    .visit { grid-template-columns: 1fr 1fr; }
+  }
+  .visit-card {
+    background: white;
+    border-radius: var(--radius-card);
+    padding: 28px;
+    box-shadow: var(--shadow-soft);
+  }
+  .visit-card h3 {
+    font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .visit-card h3 .badge {
+    width: 36px; height: 36px;
+    border-radius: 12px;
+    display: grid; place-items: center;
+  }
+  .badge svg { width: 18px; height: 18px; }
+
+  .hours-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px dashed rgba(31,66,88,0.12);
+  }
+  .hours-row:last-child { border-bottom: 0; }
+  .hours-row .d { font-family: 'Fredoka', sans-serif; font-weight: 500; color: var(--ink); }
+  .hours-row .t { color: var(--ink-soft); font-weight: 700; font-family: 'Fredoka', sans-serif; }
+  .hours-note {
+    margin-top: 14px;
+    background: var(--bg-soft);
+    border-radius: 14px;
+    padding: 12px 14px;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .loc-line {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 0;
+    color: var(--ink);
+    font-size: 0.98rem;
+  }
+  .loc-line .li {
+    width: 22px; height: 22px; flex-shrink: 0;
+    color: var(--teal-deep);
+    margin-top: 2px;
+  }
+  .loc-line .li svg { width: 100%; height: 100%; }
+  .loc-line a { color: var(--teal-deep); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .loc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .loc-actions .btn { font-size: 0.92rem; padding: 11px 18px; }
+
+  /* ---------- Contact band ---------- */
+  .contact-band {
+    margin: 0 22px;
+    background: var(--coral);
+    color: white;
+    border-radius: var(--radius-card);
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: var(--shadow-pop);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-band::before, .contact-band::after {
+    content: ""; position: absolute;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+  }
+  .contact-band::before { width: 180px; height: 180px; top: -60px; left: -50px; }
+  .contact-band::after  { width: 140px; height: 140px; bottom: -50px; right: -40px; }
+  .contact-band > * { position: relative; }
+  .contact-band h2 { color: white; }
+  .contact-band p { margin: 10px auto 22px; max-width: 460px; opacity: 0.94; }
+  .contact-actions {
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+  }
+  .contact-actions .btn { background: white; color: var(--coral); }
+  .contact-actions .btn:hover { background: var(--bg); }
+  .contact-actions .btn.outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.7); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 36px 0 48px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  .socials {
+    display: flex; gap: 12px; justify-content: center;
+    margin-bottom: 14px;
+  }
+  .socials a {
+    width: 44px; height: 44px;
+    border-radius: 14px;
+    background: white;
+    display: grid; place-items: center;
+    color: var(--ink);
+    box-shadow: var(--shadow-soft);
+    transition: transform .15s ease, color .15s ease;
+  }
+  .socials a:hover { transform: translateY(-2px); color: var(--coral); }
+  .socials svg { width: 20px; height: 20px; }
+
+  /* Section accent backgrounds */
+  #offers { background: var(--bg-soft); }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand" aria-label="Nature Play home">
+      <span class="mark">
+        <!-- Leaf icon representing Nature Play -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        </svg>
+      </span>
+      <span class="name"><span class="a">Nature</span><span class="b">Play</span></span>
+    </a>
+
+    <nav>
+      <a href="#offers">What we offer</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#visit">Visit</a>
+    </nav>
+
+    <a class="wa-pill" href="https://api.whatsapp.com/send/?phone=97338098998&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.4 11.4 0 0 0 12.1 0C5.8 0 .7 5.1.7 11.4c0 2 .5 4 1.6 5.7L.5 24l7.1-1.8c1.7.9 3.5 1.4 5.5 1.4 6.3 0 11.4-5.1 11.4-11.4 0-3-1.2-5.9-3.4-8.1l-.6.4zm-8.4 17.5c-1.7 0-3.4-.5-4.9-1.4l-.3-.2-4.2 1.1 1.1-4-.2-.3a9.4 9.4 0 0 1-1.5-5.2c0-5.2 4.3-9.5 9.5-9.5 2.5 0 4.9 1 6.7 2.8a9.4 9.4 0 0 1 2.8 6.7c0 5.3-4.3 9.6-9.5 9.6zm5.2-7.1c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.8c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.9 2.8 4.5 4 2.2 1 2.6.9 3.1.9.5-.1 1.6-.7 1.8-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="cloud cloud-1"></div>
+  <div class="cloud cloud-2"></div>
+
+  <div class="container">
+    <div class="hero-photo">
+      <img src="images/hero.jpg" alt="Child playing with building bricks at Nature Play sand area" />
+    </div>
+
+    <h1><span class="a">Nature</span> <span class="b">Play</span></h1>
+    <p class="tagline">Where Childhood Blooms Naturally 🌱</p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=97338098998&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.4 11.4 0 0 0 12.1 0C5.8 0 .7 5.1.7 11.4c0 2 .5 4 1.6 5.7L.5 24l7.1-1.8c1.7.9 3.5 1.4 5.5 1.4 6.3 0 11.4-5.1 11.4-11.4 0-3-1.2-5.9-3.4-8.1l-.6.4z"/></svg>
+        Book on WhatsApp
+      </a>
+      <a class="btn btn-secondary" href="#offers">
+        See what we offer
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <span class="dot"></span>
+      Open today · 9 AM – 10 PM · Villagio Mall, Janabiyah
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section style="padding-top: 8px;">
+  <div class="about">
+    <p>
+      <span class="leaf">🌿</span>
+      Nature Play is a calm, sensory play space designed for little ones to <strong>build, create and explore</strong> through sand, wooden toys, role-play and crafts — right in the heart of Janabiyah.
+      <span class="leaf">🌿</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section style="padding-top: 28px;">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Inside Nature Play</span>
+      <h2>A little world built for little hands</h2>
+      <p>Wooden farmer's markets, sand for digging, bricks for building, and corners for creating.</p>
+    </div>
+    <div class="gallery">
+      <img src="images/gallery-1.jpg" class="g-1" alt="School class group in the Nature Play sand area" />
+      <img src="images/gallery-2.jpg" class="g-2" alt="Children playing at the Farmer's Market wooden stand" />
+      <img src="images/gallery-3.jpg" class="g-3" alt="Kids toppling a big structure of foam bricks in the sand" />
+      <img src="images/gallery-4.jpg" class="g-4" alt="Child building a tower with large foam bricks" />
+      <img src="images/gallery-5.jpg" class="g-5" alt="Children and teacher doing craft activities together" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ OFFERS ============ -->
+<section id="offers">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">What we offer</span>
+      <h2>Play, create, celebrate</h2>
+      <p>Whether it's an hour of sand exploration or a full birthday celebration, there's something for every little one.</p>
+    </div>
+
+    <div class="offers">
+      <article class="offer">
+        <div class="ic ic-teal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18h18"/><path d="M5 18l1-7h12l1 7"/><circle cx="8" cy="9" r="2"/><circle cx="16" cy="9" r="2"/><path d="M12 5v4"/></svg>
+        </div>
+        <h3>Play &amp; Explore</h3>
+        <p>Open sensory sand area with wooden toys, bricks, trucks and imaginative play stations. Let them lead the adventure.</p>
+        <span class="tag">From 3.5 BD / hour</span>
+      </article>
+
+      <article class="offer">
+        <div class="ic ic-coral">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2 4 4 .6-3 3 .8 4.4L12 12l-3.8 2L9 9.6 6 6.6 10 6z"/><path d="M5 22h14"/></svg>
+        </div>
+        <h3>Craft &amp; Create</h3>
+        <p>"Made by little hands" — drop-in arts &amp; crafts station for budding artists with paints, brushes, and easels.</p>
+        <span class="tag">3 BD / hour</span>
+      </article>
+
+      <article class="offer">
+        <div class="ic ic-peach">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 9V7a2 2 0 0 0-2-2h-1.5l-1-2h-5l-1 2H8a2 2 0 0 0-2 2v2"/><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M9 13h6M9 17h6"/></svg>
+        </div>
+        <h3>Birthday Parties</h3>
+        <p>Celebrate at Nature Play! A beautiful, calm venue with full setup, photography and a custom wooden name gift for the birthday star.</p>
+        <span class="tag">Custom packages</span>
+      </article>
+
+      <article class="offer">
+        <div class="ic ic-sun">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17V8a1 1 0 0 1 1-1h11l3 4h2a1 1 0 0 1 1 1v5"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+        </div>
+        <h3>School Trips</h3>
+        <p>Treat your students to a day of adventure and discovery in our sensory playground — perfect for Nursery &amp; KG age.</p>
+        <span class="tag">3 BD / kid · 9:00 – 10:30 AM</span>
+      </article>
+
+      <article class="offer">
+        <div class="ic ic-sand">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6"/><path d="M9 6h6"/><path d="M3 20c2-3 5-4 9-4s7 1 9 4"/><path d="M4 20h16"/></svg>
+        </div>
+        <h3>Sensory Sand</h3>
+        <p>Bahrain's first indoor air-conditioned sensory sand hall — a calm, clean and barefoot-friendly space all year round.</p>
+        <span class="tag">Open daily</span>
+      </article>
+
+      <article class="offer">
+        <div class="ic ic-navy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l-1 13H5z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        </div>
+        <h3>Farmer's Market</h3>
+        <p>A pretend-play wooden market full of pinecones, eggs, fruit and a real cash register — for little shopkeepers in training.</p>
+        <span class="tag">Free with play entry</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Simple Pricing</span>
+      <h2>Pay only for the play</h2>
+      <p>Straightforward rates. No memberships. Walk in any day.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="label">Play &amp; Explore</div>
+        <h3>1 Hour</h3>
+        <div class="price">3.5 <small>BD</small></div>
+        <p class="sub">Full access to sensory sand &amp; play stations</p>
+      </div>
+
+      <div class="price-card coral">
+        <div class="label">Play &amp; Explore</div>
+        <h3>2 Hours</h3>
+        <div class="price">5.5 <small>BD</small></div>
+        <p class="sub">More time to dig, build &amp; create</p>
+      </div>
+
+      <div class="price-card peach">
+        <div class="label">Craft &amp; Create</div>
+        <h3>1 Hour</h3>
+        <div class="price">3 <small>BD</small></div>
+        <p class="sub">Art station with all supplies included</p>
+      </div>
+
+      <div class="price-card navy">
+        <div class="label">School Trips</div>
+        <h3>Per Child</h3>
+        <div class="price">3 <small>BD</small></div>
+        <p class="sub">One class · 9:00 – 10:30 AM · advance booking</p>
+      </div>
+    </div>
+
+    <p class="pay-note">💳 You can pay by <strong>Benefit</strong>, card or cash on arrival.</p>
+  </div>
+</section>
+
+<!-- ============ VISIT ============ -->
+<section id="visit">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Plan your visit</span>
+      <h2>We're open all week</h2>
+    </div>
+
+    <div class="visit">
+      <!-- Hours -->
+      <div class="visit-card">
+        <h3>
+          <span class="badge ic-sun">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </span>
+          Open hours
+        </h3>
+        <div class="hours-row"><span class="d">Saturday – Wednesday</span><span class="t">9 AM – 10 PM</span></div>
+        <div class="hours-row"><span class="d">Thursday – Friday</span><span class="t">9 AM – 11 PM</span></div>
+        <div class="hours-note">
+          🚌 <strong>School trips</strong> are welcomed in the morning with prior booking via WhatsApp <a href="https://api.whatsapp.com/send/?phone=97338098998&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" style="color:var(--coral); text-decoration: underline;">3809 8998</a>.
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="visit-card">
+        <h3>
+          <span class="badge ic-coral">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7-6.5-7-12a7 7 0 1 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          Visit us
+        </h3>
+        <div class="loc-line">
+          <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7-6.5-7-12a7 7 0 1 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <span>Villagio Mall, Janabiyah<br/><span style="color:var(--ink-soft); font-weight:500;">Kingdom of Bahrain</span></span>
+        </div>
+        <div class="loc-line">
+          <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span><a href="tel:+97317008998">1700 8998</a> · <a href="https://api.whatsapp.com/send/?phone=97338098998" target="_blank" rel="noopener">3809 8998 (WhatsApp)</a></span>
+        </div>
+        <div class="loc-line">
+          <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <span>Rated <strong>4.8 ★</strong> on Google · 13.6K+ Instagram followers</span>
+        </div>
+
+        <div class="loc-actions">
+          <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Nature+Play+Villagio+Mall+Janabiyah" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7-6.5-7-12a7 7 0 1 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            Get directions
+          </a>
+          <a class="btn btn-ghost" href="https://linktr.ee/natureplaybh" target="_blank" rel="noopener">All our links</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT BAND ============ -->
+<section style="padding-top: 0;">
+  <div class="contact-band">
+    <h2>Ready for a play day? 🌱</h2>
+    <p>Walk-ins welcome, or message us on WhatsApp to book birthday parties &amp; school trips in advance.</p>
+    <div class="contact-actions">
+      <a class="btn" href="https://api.whatsapp.com/send/?phone=97338098998&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px" aria-hidden="true"><path d="M20.5 3.5A11.4 11.4 0 0 0 12.1 0C5.8 0 .7 5.1.7 11.4c0 2 .5 4 1.6 5.7L.5 24l7.1-1.8c1.7.9 3.5 1.4 5.5 1.4 6.3 0 11.4-5.1 11.4-11.4 0-3-1.2-5.9-3.4-8.1l-.6.4z"/></svg>
+        Message on WhatsApp
+      </a>
+      <a class="btn outline" href="https://www.instagram.com/nature_play_bh/" target="_blank" rel="noopener">Follow on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="socials">
+      <a href="https://www.instagram.com/nature_play_bh/" target="_blank" rel="noopener" aria-label="Instagram - main">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.instagram.com/nature_play_activities/" target="_blank" rel="noopener" aria-label="Instagram - activities">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2 4 4 .6-3 3 .8 4.4L12 12l-3.8 2L9 9.6 6 6.6 10 6z"/></svg>
+      </a>
+      <a href="https://api.whatsapp.com/send/?phone=97338098998" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.4 11.4 0 0 0 12.1 0C5.8 0 .7 5.1.7 11.4c0 2 .5 4 1.6 5.7L.5 24l7.1-1.8c1.7.9 3.5 1.4 5.5 1.4 6.3 0 11.4-5.1 11.4-11.4 0-3-1.2-5.9-3.4-8.1l-.6.4z"/></svg>
+      </a>
+      <a href="https://linktr.ee/natureplaybh" target="_blank" rel="noopener" aria-label="Linktree">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 8l7-5 7 5"/><path d="M5 14l7-5 7 5"/></svg>
+      </a>
+    </div>
+    <p>© <span id="yr"></span> Nature Play · Child Development Center · Janabiyah, Bahrain</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

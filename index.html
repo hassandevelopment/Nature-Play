@@ -91,11 +91,13 @@
   .brand .mark {
     width: 38px; height: 38px;
     border-radius: 12px;
-    background: var(--teal);
+    background: var(--bg-soft);
     display: grid; place-items: center;
     flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid rgba(31,66,88,0.08);
   }
-  .brand .mark svg { width: 22px; height: 22px; color: white; }
+  .brand .mark img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
   .brand .name { display: flex; gap: 4px; }
   .brand .name .a { color: var(--teal); }
   .brand .name .b { color: var(--coral); }
@@ -158,14 +160,10 @@
     aspect-ratio: 1 / 1;
     margin: 0 auto 18px;
     position: relative; z-index: 1;
-    border-radius: 32px;
-    overflow: hidden;
-    box-shadow: var(--shadow-pop);
   }
   .hero-photo img {
     width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
+    object-fit: contain;
   }
 
   .hero h1 {
@@ -522,11 +520,7 @@
   <div class="topbar-inner">
     <a href="#top" class="brand" aria-label="Nature Play home">
       <span class="mark">
-        <!-- Leaf icon representing Nature Play -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
-          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-        </svg>
+        <img src="images/logo.png" alt="Nature Play logo" />
       </span>
       <span class="name"><span class="a">Nature</span><span class="b">Play</span></span>
     </a>
@@ -551,7 +545,7 @@
 
   <div class="container">
     <div class="hero-photo">
-      <img src="images/hero.jpg" alt="Child playing with building bricks at Nature Play sand area" />
+      <img src="images/logo.png" alt="Nature Play mascot — the friendly tree and castle characters" />
     </div>
 
     <h1><span class="a">Nature</span> <span class="b">Play</span></h1>

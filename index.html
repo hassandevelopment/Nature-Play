@@ -511,6 +511,110 @@
 
   /* Section accent backgrounds */
   #offers { background: var(--bg-soft); }
+
+  /* ---------- Burger button ---------- */
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px; height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 10px;
+    transition: background .15s ease;
+    flex-shrink: 0;
+  }
+  .burger:hover { background: rgba(31,66,88,0.07); }
+  .burger span {
+    display: block;
+    height: 2.5px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .2s ease, width .3s ease;
+    transform-origin: center;
+  }
+  .burger span:nth-child(1) { width: 22px; }
+  .burger span:nth-child(2) { width: 16px; }
+  .burger span:nth-child(3) { width: 22px; }
+
+  .burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); width: 22px; }
+  .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); width: 22px; }
+
+  @media (min-width: 820px) { .burger { display: none; } }
+
+  /* ---------- Mobile nav drawer ---------- */
+  .mobile-nav {
+    position: fixed;
+    top: 63px; left: 0; right: 0;
+    background: rgba(245, 230, 200, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(31,66,88,0.08);
+    z-index: 49;
+    display: flex;
+    flex-direction: column;
+    padding: 0 22px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .35s ease;
+  }
+  .mobile-nav.open {
+    max-height: 300px;
+    padding: 12px 22px 20px;
+  }
+  .mobile-nav a {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink);
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(31,66,88,0.08);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity .25s ease, transform .25s ease, color .15s ease;
+  }
+  .mobile-nav a:last-child { border-bottom: none; }
+  .mobile-nav a:hover { color: var(--teal); }
+  .mobile-nav.open a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .mobile-nav.open a:nth-child(1) { transition-delay: .05s; }
+  .mobile-nav.open a:nth-child(2) { transition-delay: .1s; }
+  .mobile-nav.open a:nth-child(3) { transition-delay: .15s; }
+
+  @media (min-width: 820px) { .mobile-nav { display: none; } }
+
+  /* ---------- Scroll reveal ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1);
+  }
+  .reveal.from-left {
+    transform: translateX(-32px);
+  }
+  .reveal.from-right {
+    transform: translateX(32px);
+  }
+  .reveal.scale-in {
+    transform: scale(0.94);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* stagger delays via CSS custom property */
+  .reveal[style*="--d"] { transition-delay: var(--d, 0ms); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none !important; opacity: 1 !important; transform: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -535,8 +639,21 @@
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.4 11.4 0 0 0 12.1 0C5.8 0 .7 5.1.7 11.4c0 2 .5 4 1.6 5.7L.5 24l7.1-1.8c1.7.9 3.5 1.4 5.5 1.4 6.3 0 11.4-5.1 11.4-11.4 0-3-1.2-5.9-3.4-8.1l-.6.4zm-8.4 17.5c-1.7 0-3.4-.5-4.9-1.4l-.3-.2-4.2 1.1 1.1-4-.2-.3a9.4 9.4 0 0 1-1.5-5.2c0-5.2 4.3-9.5 9.5-9.5 2.5 0 4.9 1 6.7 2.8a9.4 9.4 0 0 1 2.8 6.7c0 5.3-4.3 9.6-9.5 9.6zm5.2-7.1c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-1 1.1-.2.2-.4.2-.6.1-.3-.1-1.2-.5-2.4-1.5-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.8c-.2-.4-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.4-.3.3-.9.9-.9 2.2 0 1.3.9 2.5 1.1 2.7.1.2 1.9 2.8 4.5 4 2.2 1 2.6.9 3.1.9.5-.1 1.6-.7 1.8-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.5-.3z"/></svg>
       WhatsApp
     </a>
+
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </header>
+
+<!-- Mobile nav drawer -->
+<nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
+  <a href="#offers" class="mobile-link">What we offer</a>
+  <a href="#pricing" class="mobile-link">Pricing</a>
+  <a href="#visit" class="mobile-link">Visit</a>
+</nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
@@ -544,14 +661,14 @@
   <div class="cloud cloud-2"></div>
 
   <div class="container">
-    <div class="hero-photo">
+    <div class="hero-photo reveal scale-in" style="--d:0ms">
       <img src="images/logo.png" alt="Nature Play mascot — the friendly tree and castle characters" />
     </div>
 
-    <h1><span class="a">Nature</span> <span class="b">Play</span></h1>
-    <p class="tagline">Where Childhood Blooms Naturally 🌱</p>
+    <h1 class="reveal" style="--d:80ms"><span class="a">Nature</span> <span class="b">Play</span></h1>
+    <p class="tagline reveal" style="--d:150ms">Where Childhood Blooms Naturally 🌱</p>
 
-    <div class="cta-row">
+    <div class="cta-row reveal" style="--d:220ms">
       <a class="btn btn-primary" href="https://api.whatsapp.com/send/?phone=97338098998&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.5 3.5A11.4 11.4 0 0 0 12.1 0C5.8 0 .7 5.1.7 11.4c0 2 .5 4 1.6 5.7L.5 24l7.1-1.8c1.7.9 3.5 1.4 5.5 1.4 6.3 0 11.4-5.1 11.4-11.4 0-3-1.2-5.9-3.4-8.1l-.6.4z"/></svg>
         Book on WhatsApp
@@ -561,7 +678,7 @@
       </a>
     </div>
 
-    <div class="hero-meta">
+    <div class="hero-meta reveal" style="--d:300ms">
       <span class="dot"></span>
       Open today · 9 AM – 10 PM · Villagio Mall, Janabiyah
     </div>
@@ -570,7 +687,7 @@
 
 <!-- ============ ABOUT ============ -->
 <section style="padding-top: 8px;">
-  <div class="about">
+  <div class="about reveal">
     <p>
       <span class="leaf">🌿</span>
       Nature Play is a calm, sensory play space designed for little ones to <strong>build, create and explore</strong> through sand, wooden toys, role-play and crafts — right in the heart of Janabiyah.
@@ -582,17 +699,17 @@
 <!-- ============ GALLERY ============ -->
 <section style="padding-top: 28px;">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="section-eyebrow">Inside Nature Play</span>
       <h2>A little world built for little hands</h2>
       <p>Wooden farmer's markets, sand for digging, bricks for building, and corners for creating.</p>
     </div>
     <div class="gallery">
-      <img src="images/gallery-1.jpg" class="g-1" alt="School class group in the Nature Play sand area" />
-      <img src="images/gallery-2.jpg" class="g-2" alt="Children playing at the Farmer's Market wooden stand" />
-      <img src="images/gallery-3.jpg" class="g-3" alt="Kids toppling a big structure of foam bricks in the sand" />
-      <img src="images/gallery-4.jpg" class="g-4" alt="Child building a tower with large foam bricks" />
-      <img src="images/gallery-5.jpg" class="g-5" alt="Children and teacher doing craft activities together" />
+      <img src="images/gallery-1.jpg" class="g-1 reveal" style="--d:0ms" alt="School class group in the Nature Play sand area" />
+      <img src="images/gallery-2.jpg" class="g-2 reveal" style="--d:80ms" alt="Children playing at the Farmer's Market wooden stand" />
+      <img src="images/gallery-3.jpg" class="g-3 reveal" style="--d:120ms" alt="Kids toppling a big structure of foam bricks in the sand" />
+      <img src="images/gallery-4.jpg" class="g-4 reveal" style="--d:180ms" alt="Child building a tower with large foam bricks" />
+      <img src="images/gallery-5.jpg" class="g-5 reveal" style="--d:240ms" alt="Children and teacher doing craft activities together" />
     </div>
   </div>
 </section>
@@ -600,14 +717,14 @@
 <!-- ============ OFFERS ============ -->
 <section id="offers">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="section-eyebrow">What we offer</span>
       <h2>Play, create, celebrate</h2>
       <p>Whether it's an hour of sand exploration or a full birthday celebration, there's something for every little one.</p>
     </div>
 
     <div class="offers">
-      <article class="offer">
+      <article class="offer reveal" style="--d:0ms">
         <div class="ic ic-teal">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18h18"/><path d="M5 18l1-7h12l1 7"/><circle cx="8" cy="9" r="2"/><circle cx="16" cy="9" r="2"/><path d="M12 5v4"/></svg>
         </div>
@@ -616,7 +733,7 @@
         <span class="tag">From 3.5 BD / hour</span>
       </article>
 
-      <article class="offer">
+      <article class="offer reveal" style="--d:80ms">
         <div class="ic ic-coral">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2 4 4 .6-3 3 .8 4.4L12 12l-3.8 2L9 9.6 6 6.6 10 6z"/><path d="M5 22h14"/></svg>
         </div>
@@ -625,7 +742,7 @@
         <span class="tag">3 BD / hour</span>
       </article>
 
-      <article class="offer">
+      <article class="offer reveal" style="--d:160ms">
         <div class="ic ic-peach">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 9V7a2 2 0 0 0-2-2h-1.5l-1-2h-5l-1 2H8a2 2 0 0 0-2 2v2"/><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M9 13h6M9 17h6"/></svg>
         </div>
@@ -634,7 +751,7 @@
         <span class="tag">Custom packages</span>
       </article>
 
-      <article class="offer">
+      <article class="offer reveal" style="--d:60ms">
         <div class="ic ic-sun">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17V8a1 1 0 0 1 1-1h11l3 4h2a1 1 0 0 1 1 1v5"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
         </div>
@@ -643,7 +760,7 @@
         <span class="tag">3 BD / kid · 9:00 – 10:30 AM</span>
       </article>
 
-      <article class="offer">
+      <article class="offer reveal" style="--d:120ms">
         <div class="ic ic-sand">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6"/><path d="M9 6h6"/><path d="M3 20c2-3 5-4 9-4s7 1 9 4"/><path d="M4 20h16"/></svg>
         </div>
@@ -652,7 +769,7 @@
         <span class="tag">Open daily</span>
       </article>
 
-      <article class="offer">
+      <article class="offer reveal" style="--d:180ms">
         <div class="ic ic-navy">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16l-1 13H5z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
         </div>
@@ -667,35 +784,35 @@
 <!-- ============ PRICING ============ -->
 <section id="pricing">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="section-eyebrow">Simple Pricing</span>
       <h2>Pay only for the play</h2>
       <p>Straightforward rates. No memberships. Walk in any day.</p>
     </div>
 
     <div class="pricing-grid">
-      <div class="price-card">
+      <div class="price-card reveal" style="--d:0ms">
         <div class="label">Play &amp; Explore</div>
         <h3>1 Hour</h3>
         <div class="price">3.5 <small>BD</small></div>
         <p class="sub">Full access to sensory sand &amp; play stations</p>
       </div>
 
-      <div class="price-card coral">
+      <div class="price-card coral reveal" style="--d:80ms">
         <div class="label">Play &amp; Explore</div>
         <h3>2 Hours</h3>
         <div class="price">5.5 <small>BD</small></div>
         <p class="sub">More time to dig, build &amp; create</p>
       </div>
 
-      <div class="price-card peach">
+      <div class="price-card peach reveal" style="--d:160ms">
         <div class="label">Craft &amp; Create</div>
         <h3>1 Hour</h3>
         <div class="price">3 <small>BD</small></div>
         <p class="sub">Art station with all supplies included</p>
       </div>
 
-      <div class="price-card navy">
+      <div class="price-card navy reveal" style="--d:240ms">
         <div class="label">School Trips</div>
         <h3>Per Child</h3>
         <div class="price">3 <small>BD</small></div>
@@ -710,14 +827,14 @@
 <!-- ============ VISIT ============ -->
 <section id="visit">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <span class="section-eyebrow">Plan your visit</span>
       <h2>We're open all week</h2>
     </div>
 
     <div class="visit">
       <!-- Hours -->
-      <div class="visit-card">
+      <div class="visit-card reveal from-left">
         <h3>
           <span class="badge ic-sun">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -732,7 +849,7 @@
       </div>
 
       <!-- Location -->
-      <div class="visit-card">
+      <div class="visit-card reveal from-right" style="--d:80ms">
         <h3>
           <span class="badge ic-coral">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7-6.5-7-12a7 7 0 1 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -766,7 +883,7 @@
 
 <!-- ============ CONTACT BAND ============ -->
 <section style="padding-top: 0;">
-  <div class="contact-band">
+  <div class="contact-band reveal scale-in">
     <h2>Ready for a play day? 🌱</h2>
     <p>Walk-ins welcome, or message us on WhatsApp to book birthday parties &amp; school trips in advance.</p>
     <div class="contact-actions">
@@ -802,6 +919,46 @@
 
 <script>
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---- Burger menu ---- */
+  const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  burger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close on any mobile nav link click
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (!burger.contains(e.target) && !mobileNav.contains(e.target)) {
+      mobileNav.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  /* ---- Scroll reveal ---- */
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 
 </body>
